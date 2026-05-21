@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Núcleo Cine Pro Indie — Santuário Criativo</title>
+    <title>Santuário Criativo — Cine Pro Indie</title>
     <style>
-        /* Identidade Visual Baseada nas Suas Capas */
+        /* DESIGN TOKENS - ESTÉTICA NEO-NOIR & ÂMBAR (INSPIRADA NAS SUAS CAPAS) */
         :root {
-            --bg-color: #080808;
-            --card-bg: #121212;
-            --accent-color: #ff9d42; /* O Laranja/Âmbar das suas capas */
+            --bg-color: #070708;
+            --card-bg: #111112;
+            --accent-color: #ff9d42; /* Laranja/Âmbar característico das suas capas */
+            --accent-glow: rgba(255, 157, 66, 0.15);
             --text-color: #ffffff;
-            --text-secondary: #999999;
+            --text-secondary: #8e8e93;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-family: var(--font-family);
             -webkit-font-smoothing: antialiased;
         }
 
@@ -26,103 +28,127 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        /* --- TELA DE LOGIN / PORTAL DE ENTRADA --- */
+        /* Scrollbar Estilizada */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0d0d0e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #222224;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+        }
+
+        /* --- TELA DE ENTRADA / PORTAL DO MAGO --- */
         #login-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: linear-gradient(0deg, rgba(8,8,8,1) 0%, rgba(20,20,20,0.85) 100%), 
-                        url('https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1920') no-repeat center center/cover;
+            background: linear-gradient(0deg, rgba(7,7,8,1) 0%, rgba(7,7,8,0.85) 60%, rgba(7,7,8,0.4) 100%), 
+                        url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1920') no-repeat center center/cover;
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 0.6s ease;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
         }
 
         .login-box {
-            background-color: rgba(18, 18, 18, 0.95);
+            background-color: rgba(17, 17, 18, 0.96);
             padding: 50px 40px;
-            border-radius: 4px;
-            width: 100%;
-            max-width: 450px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 420px;
             border: 1px solid rgba(255, 157, 66, 0.15);
             text-align: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
         }
 
         .login-box h1 {
-            font-size: 1.8rem;
+            font-size: 2rem;
+            font-weight: 700;
             margin-bottom: 8px;
-            letter-spacing: 1px;
-            font-weight: 500;
+            letter-spacing: -0.5px;
         }
 
         .login-box h1 span {
             color: var(--accent-color);
+            text-shadow: 0 0 15px var(--accent-glow);
         }
 
         .login-box p {
             color: var(--text-secondary);
             font-size: 0.9rem;
             margin-bottom: 30px;
+            line-height: 1.4;
         }
 
         .input-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             text-align: left;
         }
 
         .input-group input {
             width: 100%;
-            padding: 14px;
-            background-color: #252525;
-            border: 1px solid transparent;
-            border-radius: 4px;
+            padding: 15px;
+            background-color: #1a1a1c;
+            border: 1px solid #2a2a2c;
+            border-radius: 6px;
             color: white;
-            font-size: 1rem;
-            transition: all 0.3s;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .input-group input:focus {
             outline: none;
             border-color: var(--accent-color);
-            background-color: #303030;
+            background-color: #222224;
+            box-shadow: 0 0 10px rgba(255, 157, 66, 0.1);
         }
 
         .btn-login {
             width: 100%;
-            padding: 14px;
+            padding: 15px;
             background-color: var(--accent-color);
-            color: #000;
+            color: #070708;
             border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-            font-weight: bold;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 700;
             cursor: pointer;
-            transition: transform 0.2s, background-color 0.3s;
-            margin-top: 10px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            margin-top: 8px;
         }
 
         .btn-login:hover {
             background-color: #ffb066;
             transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(255, 157, 66, 0.2);
         }
 
         .error-message {
-            color: #ff4a4a;
+            color: #ff453a;
             font-size: 0.85rem;
             margin-top: 15px;
             display: none;
         }
 
-        /* --- PLATAFORMA ESTILO NETFLIX (DASHBOARD) --- */
+        /* --- PLATAFORMA --- */
         #main-platform {
             display: none;
+            opacity: 0;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         header {
@@ -130,158 +156,218 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
-            position: absolute;
+            background: linear-gradient(to bottom, rgba(7,7,8,0.9) 0%, rgba(7,7,8,0) 100%);
+            position: fixed;
             top: 0;
             width: 100%;
-            z-index: 10;
+            z-index: 100;
+            backdrop-filter: blur(5px);
         }
 
         .logo {
             font-size: 1.4rem;
-            font-weight: bold;
-            letter-spacing: 1px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         .logo span {
             color: var(--accent-color);
         }
 
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Campo de Busca Minimalista */
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+            background-color: rgba(26, 26, 28, 0.8);
+            border: 1px solid #2a2a2c;
+            padding: 8px 14px;
+            border-radius: 20px;
+            color: white;
+            font-size: 0.85rem;
+            width: 180px;
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            width: 240px;
+            background-color: #1a1a1c;
+        }
+
         .btn-logout {
             background: transparent;
             color: var(--text-secondary);
-            border: 1px solid var(--text-secondary);
-            padding: 6px 15px;
-            border-radius: 4px;
+            border: 1px solid #2a2a2c;
+            padding: 7px 16px;
+            border-radius: 20px;
             cursor: pointer;
             font-size: 0.85rem;
+            font-weight: 500;
             transition: all 0.3s;
         }
 
         .btn-logout:hover {
             color: white;
             border-color: white;
+            background-color: rgba(255,255,255,0.05);
         }
 
         /* Banner de Destaque */
         .hero-banner {
-            height: 75vh;
-            background: linear-gradient(0deg, var(--bg-color) 0%, rgba(8,8,8,0.4) 50%, rgba(0,0,0,0.7) 100%), 
-                        url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1920') no-repeat center center/cover;
+            height: 70vh;
+            background: linear-gradient(0deg, var(--bg-color) 0%, rgba(7,7,8,0.4) 60%, rgba(7,7,8,0.8) 100%), 
+                        url('https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1920') no-repeat center center/cover;
             display: flex;
             align-items: center;
             padding: 0 4%;
+            position: relative;
         }
 
         .hero-content {
-            max-width: 600px;
+            max-width: 650px;
+            margin-top: 60px;
         }
 
         .hero-tag {
             color: var(--accent-color);
-            font-weight: bold;
-            font-size: 0.9rem;
+            font-weight: 700;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            display: inline-block;
         }
 
         .hero-title {
-            font-size: 3rem;
-            font-weight: bold;
-            line-height: 1.1;
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1;
             margin-bottom: 15px;
+            letter-spacing: -1.5px;
         }
 
         .hero-description {
-            color: #cccccc;
-            font-size: 1rem;
+            color: #d1d1d6;
+            font-size: 1.05rem;
             line-height: 1.5;
             margin-bottom: 25px;
         }
 
-        /* Fileiras de Conteúdo (Netflix Rows) */
+        /* Fileiras de Conteúdo (Netflix Style) */
         .content-container {
-            padding: 0 4% 50px 4%;
-            margin-top: -80px;
+            padding: 0 4% 80px 4%;
+            margin-top: -60px;
             position: relative;
             z-index: 5;
         }
 
         .category-row {
-            margin-bottom: 40px;
+            margin-bottom: 45px;
         }
 
         .category-title {
-            font-size: 1.3rem;
-            font-weight: 500;
-            margin-bottom: 15px;
-            color: #e5e5e5;
-            letter-spacing: 0.5px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 18px;
+            color: #f2f2f7;
+            letter-spacing: -0.3px;
         }
 
         .card-grid {
             display: flex;
-            gap: 15px;
+            gap: 18px;
             overflow-x: auto;
-            padding-bottom: 15px;
-        }
-
-        .card-grid::-webkit-scrollbar {
-            height: 6px;
-        }
-
-        .card-grid::-webkit-scrollbar-thumb {
-            background: #252525;
-            border-radius: 4px;
+            padding-bottom: 20px;
+            scroll-behavior: smooth;
         }
 
         .card {
-            min-width: 280px;
-            max-width: 280px;
+            min-width: 290px;
+            max-width: 290px;
             background-color: var(--card-bg);
-            border-radius: 4px;
+            border-radius: 6px;
             overflow: hidden;
             cursor: pointer;
-            transition: transform 0.3s ease, border-color 0.3s;
-            border: 1px solid #1a1a1a;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid #1c1c1e;
         }
 
         .card:hover {
-            transform: scale(1.04);
-            border-color: rgba(255, 157, 66, 0.4);
+            transform: scale(1.04) translateY(-4px);
+            border-color: rgba(255, 157, 66, 0.35);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
         }
 
         .card-thumb {
             width: 100%;
-            height: 155px;
+            height: 160px;
             background-size: cover;
             background-position: center;
-            background-color: #202020;
+            background-color: #1a1a1c;
+            position: relative;
+        }
+
+        /* Overlay de Play no Card */
+        .card-thumb::after {
+            content: '▶';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(7, 7, 8, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover .card-thumb::after {
+            opacity: 1;
         }
 
         .card-info {
-            padding: 15px;
+            padding: 16px;
         }
 
         .card-title {
             font-size: 0.95rem;
-            font-weight: bold;
-            margin-bottom: 5px;
+            font-weight: 600;
+            margin-bottom: 6px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            color: #ffffff;
         }
 
         .card-subtitle {
             color: var(--accent-color);
             font-size: 0.75rem;
             text-transform: uppercase;
-            font-weight: bold;
+            font-weight: 700;
             letter-spacing: 0.5px;
         }
 
-        /* --- THEATER MODE (PLAYER DE VÍDEO EXPANDIDO) --- */
+        /* Sem resultados de busca */
+        .no-results {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            padding: 40px 0;
+            text-align: center;
+            width: 100%;
+            display: none;
+        }
+
+        /* --- THEATER MODE (MODAL EXPANDIDO DO PLAYER) --- */
         #video-player-modal {
             display: none;
             position: fixed;
@@ -289,27 +375,29 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: rgba(5, 5, 5, 0.98);
+            background-color: rgba(7, 7, 8, 0.98);
             z-index: 10000;
             padding: 40px;
             overflow-y: auto;
+            backdrop-filter: blur(15px);
         }
 
         .modal-container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
         .btn-close-modal {
             background: transparent;
             border: none;
-            color: white;
-            font-size: 1.1rem;
+            color: #aeaeb2;
+            font-size: 1rem;
+            font-weight: 500;
             cursor: pointer;
-            margin-bottom: 20px;
-            display: flex;
+            margin-bottom: 25px;
+            display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             transition: color 0.3s;
         }
 
@@ -321,10 +409,11 @@
             position: relative;
             padding-bottom: 56.25%; /* Proporção 16:9 */
             height: 0;
-            background-color: black;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            border-radius: 4px;
+            background-color: #000;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+            border-radius: 8px;
             overflow: hidden;
+            border: 1px solid #1c1c1e;
         }
 
         .video-wrapper iframe {
@@ -337,11 +426,19 @@
         }
 
         .video-meta {
-            margin-top: 25px;
+            margin-top: 30px;
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 40px;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .video-meta {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 50px;
+            }
         }
 
         .video-text {
@@ -349,63 +446,74 @@
         }
 
         .video-text h2 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
         }
 
         .video-text p {
-            color: #cccccc;
+            color: #aeaeb2;
             line-height: 1.6;
-            font-size: 0.95rem;
+            font-size: 1rem;
         }
 
         .material-sidebar {
-            width: 320px;
+            width: 100%;
             background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: 4px;
-            border: 1px solid #222;
+            padding: 24px;
+            border-radius: 8px;
+            border: 1px solid #1c1c1e;
+        }
+
+        @media (min-width: 768px) {
+            .material-sidebar {
+                width: 320px;
+            }
         }
 
         .material-sidebar h3 {
-            font-size: 1rem;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #222;
-            padding-bottom: 8px;
+            font-size: 0.9rem;
+            margin-bottom: 18px;
+            border-bottom: 1px solid #1c1c1e;
+            padding-bottom: 10px;
             color: var(--accent-color);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            font-weight: 700;
         }
 
         .download-btn {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             width: 100%;
-            padding: 12px;
-            background-color: #222222;
+            padding: 14px;
+            background-color: #1c1c1e;
             color: white;
             text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
+            border-radius: 6px;
+            font-weight: 700;
             font-size: 0.9rem;
-            transition: background-color 0.3s;
-            border: 1px solid #333;
+            transition: all 0.3s;
+            border: 1px solid #2c2c2e;
         }
 
         .download-btn:hover {
-            background-color: #333333;
+            background-color: #2c2c2e;
             border-color: var(--accent-color);
+            color: var(--accent-color);
         }
     </style>
 </head>
 <body>
 
+    <!-- TELA DE LOGIN / PORTAL DO MAGO -->
     <div id="login-screen">
         <div class="login-box">
             <h1>Cine Pro <span>Indie</span></h1>
-            <p>Insira suas credenciais para acessar o santuário.</p>
+            <p>Insira seus dados de membro para entrar no nosso santuário criativo de cinema.</p>
             <div class="input-group">
                 <input type="email" id="email" placeholder="Seu e-mail de membro" required>
             </div>
@@ -413,69 +521,118 @@
                 <input type="password" id="password" placeholder="Sua senha de acesso" required>
             </div>
             <button class="btn-login" onclick="autenticar()">Entrar no Set</button>
-            <div class="error-message" id="login-error">Acesso não encontrado. Verifique os dados ou contate o Alef.</div>
+            <div class="error-message" id="login-error">Acesso não encontrado. Fale com o Alef para liberar sua entrada.</div>
         </div>
     </div>
 
+    <!-- PLATAFORMA COMPLETA -->
     <div id="main-platform">
         <header>
             <div class="logo">Cine Pro <span>Indie</span></div>
-            <button class="btn-logout" onclick="logout()">Sair do Set</button>
+            <div class="header-actions">
+                <div class="search-container">
+                    <input type="text" class="search-input" id="search-bar" placeholder="Buscar laboratório..." oninput="filtrarAulas()">
+                </div>
+                <button class="btn-logout" onclick="logout()">Sair do Set</button>
+            </div>
         </header>
 
+        <!-- Banner Principal -->
         <div class="hero-banner">
             <div class="hero-content">
-                <div class="hero-tag">Em Produção — Longa Metragem</div>
+                <div class="hero-tag">Longa Metragem em Produção</div>
                 <h1 class="hero-title">Penumbra</h1>
-                <p class="hero-description">Paralisado por memórias de um trauma passado, Uriel presencia um sequestro e falha em agir. Consumido pela culpa, ele decide fazer justiça com as próprias mãos no submundo das sombras. Protagonizado por Daniel Gama.</p>
+                <p class="hero-description">Paralisado por traumas do passado, Uriel falha ao agir diante de um sequestro violento. Consumido pela culpa e em busca de redenção, ele decide mergulhar nas sombras do submundo para fazer justiça com as próprias mãos. Protagonizado pelo ator Daniel Gama.</p>
             </div>
         </div>
 
+        <!-- Catálogo de Linhas (Totalmente alinhado com as suas capas) -->
         <div class="content-container">
             
-            <div class="category-row">
-                <h2 class="category-title">Laboratórios de Atuação & Alma</h2>
+            <!-- CATEGORIA 1: PREPARAÇÃO DE ELENCO -->
+            <div class="category-row class-row">
+                <h2 class="category-title">Preparação de Elenco & Atuação</h2>
                 <div class="card-grid">
-                    <div class="card" onclick="abrirVideo('Atuação Realista para Cinema', 'Análise profunda da transição da expressividade do teatro para a intimidade e contenção da lente de cinema.', 'https://www.youtube.com/embed/dQw4w9WgXcQ', 'https://seusite.com/roteiro.pdf')">
-                        <div class="card-thumb" style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=400');"></div>
+                    
+                    <!-- Aula 1 (Baseada na capa "11 dicas para selftape") -->
+                    <div class="card" data-title="11 dicas essenciais para selftape" onclick="abrirVideo('11 Dicas Essenciais para Selftape', 'Como preparar o seu espaço, modular a sua luz e entregar uma atuação visceral em gravações caseiras sem perder a essência do seu olhar.', 'https://www.youtube.com/embed/dQw4w9WgXcQ', 'https://seusite.com/11-dicas-selftape.pdf')">
+                        <div class="card-thumb" style="background-image: url('https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=400');"></div>
                         <div class="card-info">
-                            <div class="card-title">Teatro vs Cinema: A Contenção</div>
+                            <div class="card-title">11 Dicas para Selftape</div>
                             <div class="card-subtitle">Módulo Atuação</div>
                         </div>
                     </div>
-                    <div class="card" onclick="abrirVideo('As Camadas do Monólogo Interno', 'Como utilizar as linhas não ditas do roteiro para disparar reações involuntárias captadas pelo close-up.', 'https://www.youtube.com/embed/dQw4w9WgXcQ', '')">
+
+                    <!-- Aula 2 (Baseada na Mentoria da Luana) -->
+                    <div class="card" data-title="a lágrima contida e a verdade do olhar" onclick="abrirVideo('A Lágrima Contida e a Verdade do Olhar', 'Laboratório prático com Luana Carneiro. Aprendendo a desconstruir o exagero do palco teatral para encontrar a verdade silenciosa exigida pela câmera de cinema.', 'https://www.youtube.com/embed/dQw4w9WgXcQ', '')">
                         <div class="card-thumb" style="background-image: url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=400');"></div>
                         <div class="card-info">
-                            <div class="card-title">Monólogo Interno (Stanislavski)</div>
+                            <div class="card-title">A Lágrima Contida: Luana Carneiro</div>
                             <div class="card-subtitle">Módulo Atuação</div>
                         </div>
                     </div>
+
+                    <!-- Aula 3 (Baseada na Mentoria do Diogo) -->
+                    <div class="card" data-title="o monólogo interno e o silêncio" onclick="abrirVideo('O Monólogo Interno no Set', 'Análise prática com o ator Diogo Alan. Como preencher o silêncio e as pausas com pensamentos reais, permitindo que a câmera capture sentimentos autênticos.', 'https://www.youtube.com/embed/dQw4w9WgXcQ', '')">
+                        <div class="card-thumb" style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=400');"></div>
+                        <div class="card-info">
+                            <div class="card-title">Monólogo Interno: Diogo Alan</div>
+                            <div class="card-subtitle">Módulo Atuação</div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <div class="category-row">
+            <!-- CATEGORIA 2: A COZINHA DO SET -->
+            <div class="category-row class-row">
                 <h2 class="category-title">A Cozinha do Set (Direção & Produção)</h2>
                 <div class="card-grid">
-                    <div class="card" onclick="abrirVideo('Como Estruturar uma Ordem do Dia Perfeita', 'O passo a passo da inteligência de produção por trás de uma diária de guerrilha milimetricamente cumprida.', 'https://www.youtube.com/embed/dQw4w9WgXcQ', '')">
+                    
+                    <!-- Aula 4 (Baseada na capa "O núcleo de direção e produção") -->
+                    <div class="card" data-title="o núcleo de direção e produção" onclick="abrirVideo('O Núcleo de Direção e Produção', 'Desmistificando a união técnica e criativa necessária para fazer um filme acontecer dentro do prazo planejado, sem perder a sensibilidade da arte.', 'https://www.youtube.com/embed/dQw4w9WgXcQ', '')">
                         <div class="card-thumb" style="background-image: url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=400');"></div>
                         <div class="card-info">
-                            <div class="card-title">Inteligência de Ordem do Dia</div>
+                            <div class="card-title">Direção & Produção Real</div>
                             <div class="card-subtitle">Direção & Produção</div>
                         </div>
                     </div>
-                    <div class="card" onclick="abrirVideo('Desenho de Som Direto e Atmosfera', 'Capturando os silêncios e as frequências que dão peso psicológico às cenas de suspense.', 'https://www.youtube.com/embed/dQw4w9WgXcQ', '')">
+
+                    <!-- Aula 5 (Baseada na Ordem do Dia) -->
+                    <div class="card" data-title="ordem do dia e inteligência de set" onclick="abrirVideo('Ordem do Dia de Guerrilha', 'O mapa que guia toda a comunidade. Como desenhar um plano de diária impecável que respeite o tempo de criação de todos os departamentos.', 'https://www.youtube.com/embed/dQw4w9WgXcQ', '')">
                         <div class="card-thumb" style="background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=400');"></div>
                         <div class="card-info">
-                            <div class="card-title">Captação e Som Direto</div>
+                            <div class="card-title">Planejamento e Cronograma</div>
+                            <div class="card-subtitle">Direção & Produção</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- CATEGORIA 3: SOM E FOTOGRAFIA -->
+            <div class="category-row class-row">
+                <h2 class="category-title">Atmosfera & Tratamento Técnico</h2>
+                <div class="card-grid">
+                    
+                    <!-- Aula 6 (Baseada na capa "Som Direto") -->
+                    <div class="card" data-title="som direto e textura sonora" onclick="abrirVideo('Som Direto e Textura Sonora', 'Mapeamento de captação de áudio limpo, ruídos de suspense e o peso do silêncio no thriller neo-noir.', 'https://www.youtube.com/embed/dQw4w9WgXcQ', '')">
+                        <div class="card-thumb" style="background-image: url('https://images.unsplash.com/photo-1516280440614-37939bbacd6a?q=80&w=400');"></div>
+                        <div class="card-info">
+                            <div class="card-title">Som Direto e Ruídos</div>
                             <div class="card-subtitle">Módulo Técnico</div>
                         </div>
                     </div>
+
                 </div>
             </div>
+
+            <div class="no-results" id="no-results-msg">Nenhuma aula ou laboratório encontrado com esse nome.</div>
 
         </div>
     </div>
 
+    <!-- PLAYER EXPANDIDO (THEATER MODE) -->
     <div id="video-player-modal">
         <div class="modal-container">
             <button class="btn-close-modal" onclick="fecharVideo()">✕ Voltar para o Catálogo</button>
@@ -484,8 +641,8 @@
             </div>
             <div class="video-meta">
                 <div class="video-text">
-                    <h2 id="modal-video-title">Título da Aula</h2>
-                    <p id="modal-video-desc">Descrição completa da lição e orientações artísticas do Diretor.</p>
+                    <h2 id="modal-video-title">Título do Laboratório</h2>
+                    <p id="modal-video-desc">Descrição e notas de direção do Alef Magro.</p>
                 </div>
                 <div class="material-sidebar" id="modal-material-box">
                     <h3>Material de Apoio</h3>
@@ -496,13 +653,21 @@
     </div>
 
     <script>
-        /* --- 🔐 LOGICAMENTE ATUALIZÁVEL: USUÁRIOS CADASTRADOS --- */
+        /* --- 🔐 LISTA DE MEMBROS (ATUALIZÁVEL) --- */
         const membrosAutorizados = [
             { email: "alefmagro@gmail.com", senha: "mago" },
             { email: "luana@gmail.com", senha: "mari" },
             { email: "diogo@gmail.com", senha: "maicon" }
-            // Para adicionar novos membros que pagaram no InfinitePay, basta criar uma linha nova idêntica acima.
+            // Quando receber o pix/InfinitePay, basta colar uma linha nova aqui abaixo para dar acesso.
         ];
+
+        // Roda ao carregar a página para verificar se já está logado
+        window.onload = function() {
+            const usuarioLogado = localStorage.getItem("membroLogado");
+            if (usuarioLogado) {
+                mostrarPlataforma();
+            }
+        };
 
         function autenticar() {
             const emailDigitado = document.getElementById("email").value.trim().toLowerCase();
@@ -512,25 +677,88 @@
             const usuarioValido = membrosAutorizados.find(u => u.email === emailDigitado && u.senha === senhaDigitada);
 
             if (usuarioValido) {
-                document.getElementById("login-screen").style.opacity = "0";
-                setTimeout(() => {
-                    document.getElementById("login-screen").style.display = "none";
-                    document.getElementById("main-platform").style.display = "block";
-                }, 600);
+                localStorage.setItem("membroLogado", emailDigitado);
+                mostrarPlataforma();
             } else {
                 erro.style.display = "block";
             }
         }
 
+        function mostrarPlataforma() {
+            const loginScreen = document.getElementById("login-screen");
+            const mainPlatform = document.getElementById("main-platform");
+
+            loginScreen.style.opacity = "0";
+            setTimeout(() => {
+                loginScreen.style.display = "none";
+                mainPlatform.style.display = "block";
+                setTimeout(() => {
+                    mainPlatform.style.opacity = "1";
+                }, 50);
+            }, 600);
+        }
+
         function logout() {
-            document.getElementById("main-platform").style.display = "none";
-            document.getElementById("login-screen").style.display = "flex";
-            document.getElementById("login-screen").style.opacity = "1";
+            localStorage.removeItem("membroLogado");
+            const loginScreen = document.getElementById("login-screen");
+            const mainPlatform = document.getElementById("main-platform");
+
+            mainPlatform.style.opacity = "0";
+            setTimeout(() => {
+                mainPlatform.style.display = "none";
+                loginScreen.style.display = "flex";
+                setTimeout(() => {
+                    loginScreen.style.opacity = "1";
+                }, 50);
+            }, 600);
+
             document.getElementById("email").value = "";
             document.getElementById("password").value = "";
         }
 
-        /* --- 🎬 CONTROLE DO VIDEO PLAYER --- */
+        /* --- 🔍 FILTRO EM TEMPO REAL --- */
+        function filtrarAulas() {
+            const busca = document.getElementById("search-bar").value.toLowerCase().trim();
+            const cards = document.querySelectorAll(".card");
+            const rows = document.querySelectorAll(".class-row");
+            const noResults = document.getElementById("no-results-msg");
+            let encontrouAlgum = false;
+
+            cards.forEach(card => {
+                const titulo = card.getAttribute("data-title");
+                if (titulo.includes(busca)) {
+                    card.style.display = "block";
+                    encontrouAlgum = true;
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+            // Esconde fileiras vazias durante a busca
+            rows.forEach(row => {
+                const cardsVisiveis = row.querySelectorAll(".card[style='display: block;']");
+                const cardsInvisiveis = row.querySelectorAll(".card[style='display: none;']");
+                
+                // Se a busca estiver vazia, mostra todas as linhas
+                if (busca === "") {
+                    row.style.display = "block";
+                    row.querySelectorAll(".card").forEach(c => c.style.display = "block");
+                    noResults.style.display = "none";
+                } else if (cardsVisiveis.length === 0) {
+                    row.style.display = "none";
+                } else {
+                    row.style.display = "block";
+                }
+            });
+
+            if (!encontrouAlgum && busca !== "") {
+                noResults.style.display = "block";
+            } else {
+                noResults.style.display = "none";
+            }
+        }
+
+        /* --- 🎬 REPRODUTOR DE VÍDEO (THEATER MODE) --- */
         function abrirVideo(titulo, descricao, urlVideo, urlMaterial) {
             document.getElementById("modal-video-title").innerText = titulo;
             document.getElementById("modal-video-desc").innerText = descricao;
