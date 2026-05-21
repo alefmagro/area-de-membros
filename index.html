@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Núcleo Cine Pro Indie — Santuário Criativo</title>
+    <style>
+        /* Identidade Visual Baseada nas Suas Capas */
+        :root {
+            --bg-color: #080808;
+            --card-bg: #121212;
+            --accent-color: #ff9d42; /* O Laranja/Âmbar das suas capas */
+            --text-color: #ffffff;
+            --text-secondary: #999999;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* --- TELA DE LOGIN / PORTAL DE ENTRADA --- */
+        #login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(0deg, rgba(8,8,8,1) 0%, rgba(20,20,20,0.85) 100%), 
+                        url('https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1920') no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.6s ease;
+        }
+
+        .login-box {
+            background-color: rgba(18, 18, 18, 0.95);
+            padding: 50px 40px;
+            border-radius: 4px;
+            width: 100%;
+            max-width: 450px;
+            border: 1px solid rgba(255, 157, 66, 0.15);
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+
+        .login-box h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .login-box h1 span {
+            color: var(--accent-color);
+        }
+
+        .login-box p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px;
+            background-color: #252525;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background-color: #303030;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--accent-color);
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            background-color: #ffb066;
+            transform: translateY(-1px);
+        }
+
+        .error-message {
+            color: #ff4a4a;
+            font-size: 0.85rem;
+            margin-top: 15px;
+            display: none;
+        }
+
+        /* --- PLATAFORMA ESTILO NETFLIX (DASHBOARD) --- */
+        #main-platform {
+            display: none;
+        }
+
+        header {
+            padding: 20px 4%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .btn-logout {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--text-secondary);
+            padding: 6px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .btn-logout:hover {
+            color: white;
+            border-color: white;
+        }
+
+        /* Banner de Destaque */
+        .hero-banner {
+            height: 75vh;
+            background: linear-gradient(0deg, var(--bg-color) 0%, rgba(8,8,8,0.4) 50%, rgba(0,0,0,0.7) 100%), 
+                        url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1920') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            padding: 0 4%;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-tag {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: bold;
+            line-height: 1.1;
+            margin-bottom: 15px;
+        }
+
+        .hero-description {
+            color: #cccccc;
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        /* Fileiras de Conteúdo (Netflix Rows) */
+        .content-container {
+            padding: 0 4% 50px 4%;
+            margin-top: -80px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .category-row {
+            margin-bottom: 40px;
+        }
+
+        .category-title {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: #e5e5e5;
+            letter-spacing: 0.5px;
+        }
+
+        .card-grid {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding-bottom: 15px;
+        }
+
+        .card-grid::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .card-grid::-webkit-scrollbar-thumb {
+            background: #252525;
+            border-radius: 4px;
+        }
+
+        .card {
+            min-width: 280px;
+            max-width: 280px;
+            background-color: var(--card-bg);
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease, border-color 0.3s;
+            border: 1px solid #1a1a1a;
+        }
+
+        .card:hover {
+            transform: scale(1.04);
+            border-color: rgba(255, 157, 66, 0.4);
+        }
+
+        .card-thumb {
+            width: 100%;
+            height: 155px;
+            background-size: cover;
+            background-position: center;
+            background-color: #202020;
+        }
+
+        .card-info {
+            padding: 15px;
+        }
+
+        .card-title {
+            font-size: 0.95rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-subtitle {
+            color: var(--accent-color);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- THEATER MODE (PLAYER DE VÍDEO EXPANDIDO) --- */
+        #video-player-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(5, 5, 5, 0.98);
+            z-index: 10000;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .modal-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .btn-close-modal {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
+
+        .btn-close-modal:hover {
+            color: var(--accent-color);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* Proporção 16:9 */
+            height: 0;
+            background-color: black;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-meta {
+            margin-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 40px;
+        }
+
+        .video-text {
+            flex: 1;
+        }
+
+        .video-text h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .video-text p {
+            color: #cccccc;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .material-sidebar {
+            width: 320px;
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 4px;
+            border: 1px solid #222;
+        }
+
+        .material-sidebar h3 {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #222;
+            padding-bottom: 8px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px;
+            background-color: #222222;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+            border: 1px solid #333;
+        }
+
+        .download-btn:hover {
+            background-color: #333333;
+            border-color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="login-screen">
+        <div class="login-box">
+            <h1>Cine Pro <span>Indie</span></h1>
+            <p>Insira suas credenciais para acessar o santuário.</p>
+            <div class="input-group">
+                <input type="email" id="email" placeholder="Seu e-mail de membro" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Sua senha de acesso" required>
+            </div>
+            <button class="btn-login" onclick="autenticar()">Entrar no Set</button>
+            <div class="error-message" id="login-error">Acesso não encontrado. Verifique os dados ou contate o Alef.</div>
+        </div>
+    </div>
+
+    <div id="main-platform">
+        <header>
+            <div class="logo">Cine Pro <span>Indie</span></div>
+            <button class="btn-logout" onclick="logout()">Sair do Set</button>
+        </header>
+
+        <div class="hero-banner">
+            <div class="hero-content">
+                <div class="hero-tag">Em Produção — Longa Metragem</div>
+                <h1 class="hero-title">Penumbra</h1>
+                <p class="hero-description">Paralisado por memórias de um trauma passado, Uriel presencia um sequestro e falha em agir. Consumido pela culpa, ele decide fazer justiça com as próprias mãos no submundo das sombras. Protagonizado por Daniel Gama.</p>
+            </div>
+        </div>
+
+        <div class="content-container">
+            
+            <div class="category-row">
+                <h2 class="category-title">Laboratórios de Atuação & Alma</h2>
+                <div class="card-grid">
+                    <div class="card" onclick="abrirVideo('Atuação Realista para Cinema', 'Análise profunda da transição da expressividade do teatro para a intimidade e contenção da lente de cinema.', 'https://www.youtube.com/embed/dQw4w9WgXcQ', 'https://seusite.com/roteiro.pdf')">
+                        <div class="card-thumb" style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=400');"></div>
+                        <div class="card-info">
+                            <div class="card-title">Teatro vs Cinema: A Contenção</div>
+                            <div class="card-subtitle">Módulo Atuação</div>
+                        </div>
+                    </div>
+                    <div class="card" onclick="abrirVideo('As Camadas do Monólogo Interno', 'Como utilizar as linhas não ditas do roteiro para disparar reações involuntárias captadas pelo close-up.', 'https://www.youtube.com/embed/dQw4w9WgXcQ', '')">
+                        <div class="card-thumb" style="background-image: url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=400');"></div>
+                        <div class="card-info">
+                            <div class="card-title">Monólogo Interno (Stanislavski)</div>
+                            <div class="card-subtitle">Módulo Atuação</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-row">
+                <h2 class="category-title">A Cozinha do Set (Direção & Produção)</h2>
+                <div class="card-grid">
+                    <div class="card" onclick="abrirVideo('Como Estruturar uma Ordem do Dia Perfeita', 'O passo a passo da inteligência de produção por trás de uma diária de guerrilha milimetricamente cumprida.', 'https://www.youtube.com/embed/dQw4w9WgXcQ', '')">
+                        <div class="card-thumb" style="background-image: url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=400');"></div>
+                        <div class="card-info">
+                            <div class="card-title">Inteligência de Ordem do Dia</div>
+                            <div class="card-subtitle">Direção & Produção</div>
+                        </div>
+                    </div>
+                    <div class="card" onclick="abrirVideo('Desenho de Som Direto e Atmosfera', 'Capturando os silêncios e as frequências que dão peso psicológico às cenas de suspense.', 'https://www.youtube.com/embed/dQw4w9WgXcQ', '')">
+                        <div class="card-thumb" style="background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=400');"></div>
+                        <div class="card-info">
+                            <div class="card-title">Captação e Som Direto</div>
+                            <div class="card-subtitle">Módulo Técnico</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="video-player-modal">
+        <div class="modal-container">
+            <button class="btn-close-modal" onclick="fecharVideo()">✕ Voltar para o Catálogo</button>
+            <div class="video-wrapper">
+                <iframe id="video-frame" src="" allowfullscreen></iframe>
+            </div>
+            <div class="video-meta">
+                <div class="video-text">
+                    <h2 id="modal-video-title">Título da Aula</h2>
+                    <p id="modal-video-desc">Descrição completa da lição e orientações artísticas do Diretor.</p>
+                </div>
+                <div class="material-sidebar" id="modal-material-box">
+                    <h3>Material de Apoio</h3>
+                    <a href="#" id="modal-download-link" target="_blank" class="download-btn">⬇ Baixar Roteiro / Material</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* --- 🔐 LOGICAMENTE ATUALIZÁVEL: USUÁRIOS CADASTRADOS --- */
+        const membrosAutorizados = [
+            { email: "alefmagro@gmail.com", senha: "mago" },
+            { email: "luana@gmail.com", senha: "mari" },
+            { email: "diogo@gmail.com", senha: "maicon" }
+            // Para adicionar novos membros que pagaram no InfinitePay, basta criar uma linha nova idêntica acima.
+        ];
+
+        function autenticar() {
+            const emailDigitado = document.getElementById("email").value.trim().toLowerCase();
+            const senhaDigitada = document.getElementById("password").value;
+            const erro = document.getElementById("login-error");
+
+            const usuarioValido = membrosAutorizados.find(u => u.email === emailDigitado && u.senha === senhaDigitada);
+
+            if (usuarioValido) {
+                document.getElementById("login-screen").style.opacity = "0";
+                setTimeout(() => {
+                    document.getElementById("login-screen").style.display = "none";
+                    document.getElementById("main-platform").style.display = "block";
+                }, 600);
+            } else {
+                erro.style.display = "block";
+            }
+        }
+
+        function logout() {
+            document.getElementById("main-platform").style.display = "none";
+            document.getElementById("login-screen").style.display = "flex";
+            document.getElementById("login-screen").style.opacity = "1";
+            document.getElementById("email").value = "";
+            document.getElementById("password").value = "";
+        }
+
+        /* --- 🎬 CONTROLE DO VIDEO PLAYER --- */
+        function abrirVideo(titulo, descricao, urlVideo, urlMaterial) {
+            document.getElementById("modal-video-title").innerText = titulo;
+            document.getElementById("modal-video-desc").innerText = descricao;
+            document.getElementById("video-frame").src = urlVideo;
+
+            const boxMaterial = document.getElementById("modal-material-box");
+            if (urlMaterial && urlMaterial !== "") {
+                boxMaterial.style.display = "block";
+                document.getElementById("modal-download-link").href = urlMaterial;
+            } else {
+                boxMaterial.style.display = "none";
+            }
+
+            document.getElementById("video-player-modal").style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+
+        function fecharVideo() {
+            document.getElementById("video-player-modal").style.display = "none";
+            document.getElementById("video-frame").src = "";
+            document.body.style.overflow = "auto";
+        }
+    </script>
+</body>
+</html>
